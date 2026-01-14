@@ -1,0 +1,35 @@
+[tools]
+zig = "0.15.2"
+"github:zigtools/zls" = "0.15.0"
+
+[tasks.check]
+run = 'zig build -fincremental --watch --prominent-compile-errors'
+
+[tasks.run]
+run = 'zig build run -freference-trace=15 --prominent-compile-errors'
+
+[tasks.install]
+run = [
+  'zig build --release=safe',
+  'cp -r ./zig-out/owm.app ~/Applications',
+  'cp ./zig-out/com.sojamann.owm.plist ~/Library/LaunchAgents/com.sojamann.owm.plist'
+]
+
+[tasks.install-svc]
+#depends = ["install"]
+run = [
+  'launchctl unload ~/Library/LaunchAgents/com.sojamann.owm.plist',
+  'rm ~/Library/Logs/com.sojamann.owm/{err,out} || true',
+  'launchctl load ~/Library/LaunchAgents/com.sojamann.owm.plist',
+]
+
+[tasks.uninstall]
+run = [
+  'launchctl stop com.sojamann.owm',
+  'launchctl unload ~/Library/LaunchAgents/com.sojamann.owm.plist',
+  'rm ~/Library/Logs/com.sojamann.owm/{err,out}',
+  'tccutil reset Accessibility com.sojamann.owm',
+  'rm -rf ~/Library/Apps/owm.app',
+]
+
+

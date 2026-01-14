@@ -1,0 +1,20 @@
+.{
+    .name = .winalign,
+    .version = "0.0.0",
+    .dependencies = .{
+        .zig_objc = .{
+            .url = "git+https://github.com/mitchellh/zig-objc#49dae46e413647545cc5c1f3e7798e9c761976b0",
+            .hash = "zig_objc-0.0.0-Ir_Sp5wTAQDuSB-PaIBSxNPhnQFT-H8UGd5kBAdnUaD4",
+        },
+    },
+    .fingerprint = 0xfd75772a11705011, // Changing this has security and trust implications.
+    .minimum_zig_version = "0.15.2",
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        // For example...
+        //"LICENSE",
+        //"README.md",
+    },
+}
